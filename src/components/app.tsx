@@ -53,9 +53,11 @@ const App: FunctionalComponent = () => {
 
   function handleInput(event: TargetedEvent<HTMLTextAreaElement, Event>) {
     const newValue = event.currentTarget.value;
+    const replaced = replace(newValue);
 
     setInputValue(newValue);
-    setOutputValue(replace(newValue))
+    setOutputValue(replaced);
+    navigator.clipboard.writeText(replaced);
   }
 
   return (
