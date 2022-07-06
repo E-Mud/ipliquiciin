@@ -1,11 +1,11 @@
 {
-  "name": "ipliquiciin",
-  "short_name": "ipliquiciin",
+  "name": "Ipliquiciin",
+  "short_name": "Ipliquiciin",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fff",
-  "theme_color": "#673ab8",
+  "theme_color": "#fbf0e6",
+  "background_color": "#fbf0e6",
   "icons": [
     {
       "src": "/assets/icons/android-chrome-192x192.png",
@@ -16,6 +16,12 @@
       "src": "/assets/icons/android-chrome-512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "/assets/icons/maskable_icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
