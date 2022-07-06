@@ -27,7 +27,9 @@ function isUpperCase(val: string) {
 
 function replace(input: string) {
   return input
-    .replace(/(?<![qQgG])u/g, 'i')
+    .replace(/([^qQgG]|^)u/g, function(_, firstLetter: string) {
+      return (firstLetter || '') + 'i';
+    })
     //
     .replace(/ü[ei]/g, 'ui')
     //
