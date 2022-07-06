@@ -5,6 +5,23 @@ import { useAutosize } from '../hooks/use-autosize';
 import { Ref, useRef, useState } from 'preact/hooks';
 import { TargetedEvent } from 'preact/compat';
 
+const VOWEL_MAP: Record<string, string> = {
+  'a': 'i',
+  'e': 'i',
+  'o': 'i',
+  'á': 'í',
+  'é': 'í',
+  'ó': 'í',
+  'A': 'I',
+  'E': 'I',
+  'O': 'I',
+  'U': 'I',
+  'Á': 'Í',
+  'É': 'Í',
+  'Ó': 'Í',
+  'Ú': 'Í',
+};
+
 function useTextarea(): [
   Ref<HTMLTextAreaElement>,
   string,
@@ -27,8 +44,8 @@ function isUpperCase(val: string) {
 
 function replace(input: string) {
   return input
-    .replace(/([^qQgG]|^)u/g, function(_, firstLetter: string) {
-      return (firstLetter || '') + 'i';
+    .replace(/([^qQgG]|^)([uú])/g, function(_, firstLetter: string, vowel: string) {
+      return (firstLetter || '') + VOWEL_MAP[vowel];
     })
     //
     .replace(/ü[ei]/g, 'ui')
@@ -36,16 +53,16 @@ function replace(input: string) {
     .replace(/([gG])[ao]/g, '$1ui')
     .replace(/([gG])u[^ei]/g, '$1ui')
     //
-    .replace(/([zZ])[aou]/g, (_, firstLetter: string) => {
-      return isUpperCase(firstLetter) ? 'Ci' : 'ci';
+    .replace(/([zZ])([aouáóú])/g, (_, firstLetter: string, vowel: string) => {
+      return (isUpperCase(firstLetter) ? 'C' : 'c') + VOWEL_MAP[vowel];
     })
     //
-    .replace(/([cC])[aou]/g, (_, firstLetter: string) => {
-      return isUpperCase(firstLetter) ? 'Qui' : 'qui';
+    .replace(/([cC])([aouáóú])/g, (_, firstLetter: string, vowel: string) => {
+      return (isUpperCase(firstLetter) ? 'Qu' : 'qu') + VOWEL_MAP[vowel];
     })
     //
-    .replace(/[aeoáéóAEOUÁÉÓÚ]/g, (firstLetter: string) => {
-      return isUpperCase(firstLetter) ? 'I' : 'i';
+    .replace(/[aeoáéóAEOUÁÉÓÚ]/g, (vowel: string) => {
+      return VOWEL_MAP[vowel];
     });
 }
 
