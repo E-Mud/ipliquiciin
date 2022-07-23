@@ -9,9 +9,11 @@ const VOWEL_MAP: Record<string, string> = {
   'a': 'i',
   'e': 'i',
   'o': 'i',
+  'u': 'i',
   'á': 'í',
   'é': 'í',
   'ó': 'í',
+  'ú': 'í',
   'A': 'I',
   'E': 'I',
   'O': 'I',
@@ -44,7 +46,7 @@ function isUpperCase(val: string) {
 
 function replace(input: string) {
   return input
-    .replace(/([^qQgG]|^)([uú])/g, function(_, firstLetter: string, vowel: string) {
+    .replace(/([^qQgGzZcC]|^)([uú])/g, function(_, firstLetter: string, vowel: string) {
       return (firstLetter || '') + VOWEL_MAP[vowel];
     })
     //
